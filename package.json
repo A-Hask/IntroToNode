@@ -19,6 +19,7 @@
   "homepage": "https://github.com/iamshaunjp/node-crash-course#readme",
   "dependencies": {
     "express": "^4.19.2",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "nodemon": "^3.1.0"
   }
 }
