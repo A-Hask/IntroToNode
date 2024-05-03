@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 
 // middleware & static files
 app.use(express.static('public'));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use((req, res, next) => {
@@ -27,6 +28,8 @@ app.use((req, res, next) => {
 });
 
 // routes
+app.use(authRoutes);
+
 app.get('/', (req, res) => {
   res.redirect('/blogs');
 });
@@ -42,5 +45,3 @@ app.use('/blogs', blogRoutes);
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
 });
-
-app.use(authRoutes);
