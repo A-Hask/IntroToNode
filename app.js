@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // express app
 const app = express();
@@ -41,3 +42,5 @@ app.use('/blogs', blogRoutes);
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
 });
+
+app.use(authRoutes);
