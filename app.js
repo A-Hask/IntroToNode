@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
+const requireAuth = require('./middleware/authMiddleware');
 
 // express app
 const app = express();
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(requireAuth());
 app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
@@ -33,15 +35,15 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 
 app.get('/', (req, res) => {
-  res.redirect('/blogs');
+  res.redirect('/signup');
 });
 
-app.get('/about', (req, res) => {
+app.get('/about', requireAuth, (req, res) => {
   res.render('about', { title: 'About' });
 });
 
 // blog routes
-app.use('/blogs', blogRoutes);
+app.use('/blogs', requireAuth, blogRoutes);
 
 // 404 page
 app.use((req, res) => {
