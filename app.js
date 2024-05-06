@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
-const requireAuth = require('./middleware/authMiddleware');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 // express app
 const app = express();
@@ -32,6 +32,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use(authRoutes);
+app.get('*', checkUser);
 
 app.get('/', (req, res) => {
   res.redirect('/signup');
