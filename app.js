@@ -25,7 +25,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(requireAuth());
 app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
