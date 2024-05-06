@@ -1,6 +1,5 @@
 <%- include('./partials/head.ejs') %>
 
-<body>
   <%- include("./partials/nav.ejs") %>
 
  <form>
@@ -13,6 +12,8 @@
   <div class="password error"></div>
   <button>Sign up</button>
  </form>
+
+ <%- include('./partials/footer.ejs') %>
 
  <script>
   const form = document.querySelector('form');
@@ -36,7 +37,7 @@
         body: JSON.stringify({email, password}),
         headers: { 'Content-Type': 'application/json' }
       });
-      const data = await jwt.json();
+      const data = await res.json();
       console.log(data);
       if (data.errors) {
         emailError.textContent = data.errors.email;
@@ -52,6 +53,3 @@
   });
  </script>
 
- </body> 
-
-<%- include('./partials/footer.ejs') %>

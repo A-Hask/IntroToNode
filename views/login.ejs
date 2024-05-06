@@ -1,8 +1,8 @@
 <%- include('./partials/head.ejs') %>
-<body>
+
     <%- include("./partials/nav.ejs") %>
 
-    <form>
+    <form action="/signup">
         <h2>Log in</h2>
         <label for="email">Email</label>
         <input type="test" name="email" required>
@@ -13,6 +13,8 @@
         <button>Log in</button>
        </form>
       
+<%- include('./partials/footer.ejs') %>
+
        <script>
         const form = document.querySelector('form');
         const emailError = document.querySelector('.email.error');
@@ -43,14 +45,9 @@
             }
             if (data.user) {
                 location.assign('/blogs');
-            }
-            }
+            }}
             catch (err) {
             console.log(err);
             }
         });
        </script>
-
-</body>
-
-<%- include('./partials/footer.ejs') %>
